@@ -1,0 +1,25 @@
+import Foundation
+
+print("Hello, World!")
+let currentTime = Date()
+let format_time = DateFormatter()
+format_time.timeStyle = .medium
+let format_date = DateFormatter()
+format_date.dateFormat = "dd.MM.yy"
+let time = format_time.string(from: currentTime)
+let date = format_date.string(from: currentTime)
+print(time)
+let text = "Text"
+var message: String = ""
+let file_dir = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).first
+
+ if file_dir != nil{
+
+    let fileURL = file_dir?.appendingPathComponent("/Data/\(date).txt")
+    message = "Done saving! \(time)"
+    try message.write(to: fileURL!, atomically: false, encoding: .utf8)
+    print("done saving!")
+    let read_data = try String(contentsOf: fileURL!, encoding: .utf8)
+    print("Data is: ", read_data)
+    
+}
